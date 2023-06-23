@@ -237,3 +237,69 @@ function LoginForm({ login }) {
     </form>
   );
 }
+
+
+// MongoDB
+
+"create Index"=db.collection.createIndex({ field: 1 });
+
+"sort"=db.collection.find().sort({ field: 1 });
+
+// Insert a single document
+db.collectionName.insert({ key: value });
+
+// Insert multiple documents
+db.collectionName.insertMany([
+  { key1: value1 },
+  { key2: value2 },
+  { key3: value3 }
+]);
+
+// Update a single document
+db.collectionName.updateOne({ filter }, { $set: { key: value } });
+
+// Update multiple documents
+db.collectionName.updateMany({ filter }, { $set: { key: value } });
+
+// Delete a single document
+db.collectionName.deleteOne({ filter });
+
+// Delete multiple documents
+db.collectionName.deleteMany({ filter });
+
+//Increase: The $inc operator is used to increment a numeric field in a document.
+db.collectionName.updateOne({ filter }, { $inc: { field: value } });
+
+//Decrease: The $inc operator can also be used to decrement a numeric field in a document.
+db.collectionName.updateOne({ filter }, { $inc: { field: -value } });
+
+// Find all documents
+db.collectionName.find();
+
+// Find documents matching a filter
+db.collectionName.find({ key: value });
+
+// Find documents with specific fields
+db.collectionName.find({}, { field1: 1, field2: 1 });
+
+// Find a single document
+db.collectionName.findOne({ key: value });
+
+//Aggregation: MongoDB provides the Aggregation Framework for performing advanced data analysis and transformation operations.
+db.collectionName.aggregate([
+  { $match: { key: value } },
+  { $group: { _id: "$field", total: { $sum: 1 } } },
+  { $sort: { total: -1 } },
+  { $limit: 5 }
+]);
+
+//Indexing: MongoDB supports indexing to improve query performance.
+// Create an index on a field
+db.collectionName.createIndex({ field: 1 });
+
+// Query using an index
+db.collectionName.find({ field: value }).hint({ field: 1 });
+
+
+
+

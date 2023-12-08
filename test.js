@@ -1,3 +1,95 @@
+import React from 'react';
+import { useState } from 'react';
+
+function useCounter(initialValue = 0) {
+  const [count, setCount] = useState(initialValue);
+
+  const increase = () => {
+    setCount(count + 1);
+  };
+
+  const decrease = () => {
+    setCount(count - 1);
+  };
+
+  const reset = () => {
+    setCount(initialValue);
+  };
+
+  return {
+    count,
+    increase,
+    decrease,
+    reset
+  };
+}
+
+function Counter() {
+  const { count, increase, decrease, reset } = useCounter(0);
+
+  return (
+    <div>
+      <h2>Counter: {count}</h2>
+      <button onClick={increase}>Increase</button>
+      <button onClick={decrease}>Decrease</button>
+      <button onClick={reset}>Reset</button>
+    </div>
+  );
+}
+
+export default Counter;
+
+// single
+import React, { useState } from 'react';
+
+function MyComponent() {
+  const [count, setCount] = useState(0);
+
+  const incrementCount = () => {
+    setCount(count + 1);
+  };
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={incrementCount}>Increment</button>
+    </div>
+  );
+}
+
+
+//props
+import React from 'react';
+import ChildComponent from './ChildComponent';
+
+function ParentComponent() {
+  const name = 'Alice';
+  const age = 25;
+
+  return (
+    <div>
+      <h2>Parent Component</h2>
+      <ChildComponent name={name} age={age} />
+    </div>
+  );
+}
+
+// export default ParentComponent;
+
+import React from 'react';
+
+function ChildComponent(props) {
+  return (
+    <div>
+      <p>Name: {props.name}</p>
+      <p>Age: {props.age}</p>
+    </div>
+  );
+}
+
+// export default ChildComponent;
+
+
 function primeAndComposite(N,M,arr){
     //write code here
 let prime_sum=0;  

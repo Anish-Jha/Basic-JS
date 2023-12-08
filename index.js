@@ -1,3 +1,21 @@
+//clousre
+function outerFunction() {
+  let outerVariable = 'I am from the outer function';
+
+  function innerFunction() {
+    console.log(outerVariable); // Inner function accessing outerVariable
+  }
+
+  return innerFunction; // Return the inner function from the outer function
+}
+
+const myFunction = outerFunction(); // Call outerFunction and store the returned inner function
+
+// Even though outerFunction has finished executing,
+// myFunction still remembers the outerVariable due to closure
+myFunction(); // Outputs: "I am from the outer function"
+
+
 // HOF
 function hof(callback) {
   callback();
@@ -56,6 +74,8 @@ function greet() {
   console.log("Hello");
 }
 
+
+
 function fetchData() {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -84,7 +104,7 @@ function fetchData() {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       const success = true; // Simulating a successful operation
-      if (!success) {
+      if (success) {
         resolve("Data fetched");
       } else {
         reject("Error fetching data");
@@ -123,6 +143,39 @@ Output: 1, 2, 3, 4;
 console.log(Math.random() * 50);
 
 // Constructor function with methods and properties
+function Car(make, model, year) {
+  this.make = make;
+  this.model = model;
+  this.year = year;
+}
+
+// Creating instances with 'new' keyword
+let myCar = new Car('Toyota', 'Corolla', 2020);
+let yourCar = new Car('Honda', 'Accord', 2018);
+
+let animal = {
+  type: 'Mammal',
+  sound: 'Makes a noise'
+};
+
+let dog = Object.create(animal);
+dog.breed = 'Labrador';
+
+// Using ES6 class syntax
+class Rectangle {
+  constructor(width, height) {
+    this.width = width;
+    this.height = height;
+  }
+
+  calculateArea() {
+    return this.width * this.height;
+  }
+}
+
+let rect = new Rectangle(5, 10);
+
+
 function BankAccount() {
   this.balance = 0;
 
@@ -176,6 +229,29 @@ console.log(person1.age); // Output: 30
 // Using square bracket notation
 console.log(person1["name"]); // Output: "John"
 console.log(person1["age"]); // Output: 30
+
+
+//prototyples inheritance
+// Parent object (prototype)
+let animal2 = {
+  makeSound: function() {
+    console.log('Some generic sound');
+  }
+};
+
+// Child object inheriting from the parent
+let dog = Object.create(animal2);
+dog.breed = 'Labrador';
+
+// Adding a method to the child object
+dog.bark = function() {
+  console.log('Woof!');
+};
+
+// Using properties and methods from the prototype
+dog.makeSound(); // Outputs: 'Some generic sound'
+dog.bark(); // Outputs: 'Woof!'
+
 
 // Memoization
 function expensiveFunction(n) {
